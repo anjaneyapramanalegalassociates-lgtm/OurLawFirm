@@ -233,7 +233,67 @@
                 document.body.style.overflow = '';
             }, 300);
         }
+        const articleData = {
+            'sarfaesi': {
+                title: 'Understanding the SARFAESI Act: A Guide for Borrowers',
+                category: 'Banking Law',
+                date: 'April 10, 2026',
+                author: 'Adv. Sachin Kumar',
+                img: 'https://images.unsplash.com/photo-1589829085413-56de8ae18c73?q=80&w=800&auto=format&fit=crop'
+            },
+            'divorce': {
+                title: 'Crucial Steps in Filing a Mutual Consent Divorce Petition',
+                category: 'Family Law',
+                date: 'March 28, 2026',
+                author: 'Kumari Samridhi Pandey',
+                img: 'https://images.unsplash.com/photo-1505664177922-990e8da29d10?q=80&w=800&auto=format&fit=crop'
+            },
+            'property': {
+                title: 'Property Disputes: The Importance of a Title Search',
+                category: 'Real Estate Law',
+                date: 'March 15, 2026',
+                author: 'Parkhi Pankaj',
+                img: 'https://images.unsplash.com/photo-1560415755-bd80d06eda60?q=80&w=800&auto=format&fit=crop'
+            }
+        };
 
+        function openArticleModal(id) {
+            const data = articleData[id];
+            if(!data) return;
+            
+            document.getElementById('article-modal-img').src = data.img;
+            document.getElementById('article-modal-category').innerText = data.category;
+            document.getElementById('article-modal-title').innerText = data.title;
+            document.getElementById('article-modal-author').innerText = data.author;
+            document.getElementById('article-modal-date').innerText = data.date;
+            
+            const contentHtml = document.getElementById('article-content-' + id);
+            if(contentHtml) {
+                document.getElementById('article-modal-body').innerHTML = contentHtml.innerHTML;
+            } else {
+                document.getElementById('article-modal-body').innerHTML = '<p>Content not available.</p>';
+            }
+            
+            const modal = document.getElementById('article-modal');
+            modal.classList.remove('hidden');
+            modal.classList.add('flex');
+            
+            void modal.offsetWidth; 
+            modal.classList.remove('opacity-0');
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closeArticleModal(event) {
+            if (event && event.target !== event.currentTarget) return;
+            
+            const modal = document.getElementById('article-modal');
+            modal.classList.add('opacity-0');
+            setTimeout(() => {
+                modal.classList.remove('flex');
+                modal.classList.add('hidden');
+                document.body.style.overflow = '';
+            }, 300);
+        }
         let currentSlide = 0;
         const totalSlides = 3;
         let slideInterval;
