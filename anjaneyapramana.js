@@ -239,21 +239,21 @@
                 category: 'Banking Law',
                 date: 'April 10, 2026',
                 author: 'Adv. Sachin Kumar',
-                img: 'https://images.unsplash.com/photo-1589829085413-56de8ae18c73?q=80&w=800&auto=format&fit=crop'
+                img: 'banking-law-article.jpeg'
             },
             'divorce': {
                 title: 'Crucial Steps in Filing a Mutual Consent Divorce Petition',
                 category: 'Family Law',
                 date: 'March 28, 2026',
                 author: 'Kumari Samridhi Pandey',
-                img: 'https://images.unsplash.com/photo-1505664177922-990e8da29d10?q=80&w=800&auto=format&fit=crop'
+                img: 'family-law-article.jpg'
             },
             'property': {
                 title: 'Property Disputes: The Importance of a Title Search',
                 category: 'Real Estate Law',
                 date: 'March 15, 2026',
                 author: 'Parkhi Pankaj',
-                img: 'https://images.unsplash.com/photo-1560415755-bd80d06eda60?q=80&w=800&auto=format&fit=crop'
+                img: 'real-estate-article.jpg'
             }
         };
 
