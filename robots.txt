@@ -1,0 +1,86 @@
+Advanced robots.txt for https://anjaneyapramana.com/
+
+--------------------------------------------------------
+
+General Rules for All Crawlers
+
+--------------------------------------------------------
+
+User-agent: *
+Allow: /
+Allow: /?lang=hi
+
+Block common backend, system, and admin directories
+
+Disallow: /admin/
+Disallow: /wp-admin/
+Disallow: /wp-includes/
+Disallow: /cgi-bin/
+Disallow: /private/
+Disallow: /tmp/
+
+Prevent crawling of internal search results or random query parameters
+
+(Keeps your crawl budget focused on actual pages)
+
+Disallow: /search/
+Disallow: /?q=
+
+--------------------------------------------------------
+
+Specific Rules for Major Search Engines
+
+--------------------------------------------------------
+
+Ensure Googlebot has full access
+
+User-agent: Googlebot
+Allow: /
+
+Specifically allow Google Image bot to crawl your team and logo images
+
+User-agent: Googlebot-Image
+Allow: /
+Allow: /.jpg$
+Allow: /.jpeg$
+Allow: /.png$
+Allow: /.webp$
+Allow: /*.gif$
+
+Add a crawl delay for Bing to prevent server overload
+
+(Google ignores Crawl-delay, but Bing and Yahoo respect it)
+
+User-agent: Bingbot
+Crawl-delay: 10
+
+User-agent: Yandex
+Crawl-delay: 10
+
+--------------------------------------------------------
+
+Block Bad Bots and Scrapers (Bandwidth Savers)
+
+--------------------------------------------------------
+
+User-agent: AhrefsBot
+Disallow: /
+
+User-agent: MJ12bot
+Disallow: /
+
+User-agent: Rogerbot
+Disallow: /
+
+User-agent: SemrushBot
+Disallow: /
+
+--------------------------------------------------------
+
+Sitemap Location
+
+--------------------------------------------------------
+
+Points all crawlers to the sitemap we just generated
+
+Sitemap: https://www.google.com/search?q=https://anjaneyapramana.com/sitemap.xml
