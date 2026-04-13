@@ -121,15 +121,6 @@
             langTexts.forEach(el => el.innerText = text);
         }
 
-        document.addEventListener('DOMContentLoaded', () => {
-            if (cookieLang === 'hi') {
-                currentLang = 'hi';
-                updateLangButton('English');
-            }
-            
-            initTyped(currentLang);
-        });
-
         function toggleLanguage() {
             const targetLang = currentLang === 'en' ? 'hi' : 'en';
             const translateSelect = document.querySelector('.goog-te-combo');
@@ -342,6 +333,20 @@
         resetSlideInterval();
 
         document.addEventListener('DOMContentLoaded', () => {
+            if (cookieLang === 'hi') {
+                currentLang = 'hi';
+                updateLangButton('English');
+            }
+            
+            initTyped(currentLang);
+
+            const hash = window.location.hash.substring(1); 
+            if (hash && articleData[hash]) {
+                setTimeout(() => {
+                    openArticleModal(hash);
+                }, 500);
+            }
+
             const menuBtn = document.getElementById('mobile-menu-btn');
             const mobileMenu = document.getElementById('mobile-menu');
             const mobileLinks = document.querySelectorAll('.mobile-link');
