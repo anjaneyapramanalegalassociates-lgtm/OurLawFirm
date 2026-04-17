@@ -85,6 +85,24 @@
             }
         }
 
+        function showTypingIndicator() {
+            const chatContainer = document.getElementById('chat-messages');
+            const msgDiv = document.createElement('div');
+            msgDiv.id = 'typing-indicator-bubble';
+            msgDiv.className = "bg-gray-200 text-gray-800 rounded-lg p-3 w-16 self-start shadow-sm typing-indicator flex justify-center items-center h-10";
+            msgDiv.innerHTML = '<span></span><span></span><span></span>';
+            
+            chatContainer.appendChild(msgDiv);
+            chatContainer.scrollTop = chatContainer.scrollHeight;
+        }
+
+        function removeTypingIndicator() {
+            const indicator = document.getElementById('typing-indicator-bubble');
+            if (indicator) {
+                indicator.remove();
+            }
+        }
+
         function handleUserMessage() {
             const inputField = document.getElementById('chat-bot-input');
             const userText = inputField.value.trim();
@@ -94,10 +112,14 @@
             appendMessage('user', userText);
             inputField.value = '';
 
+            showTypingIndicator();
+
             setTimeout(() => {
+                removeTypingIndicator();
+                
                 const botResponse = getBotResponse(userText);
                 appendMessage('bot', botResponse);
-            }, 700);
+            }, 1500);
         }
 
         function handleEnterKeyPress(event) {
