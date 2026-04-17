@@ -350,32 +350,32 @@
             'sachin': {
                 name: 'Adv. Sachin Kumar',
                 role: 'Founder & Managing Advocate | High Court, Supreme Court, DRT',
-                img: 'https://i.ibb.co/Z6ShYC7P/Whats-App-Image-2026-04-11-at-3-18-16-PM.jpg',
+                img: 'sachin.jpg',
                 socials: { linkedin: 'https://www.linkedin.com/in/sachin-kumar-87b584203?utm_source=share_via&utm_content=profile&utm_medium=member_ios', twitter: 'https://x.com/LegalPramana312', email: 'sachinsunny6991@gmail.com' }
             },
             'samridhi': {
                 name: 'Kumari Samridhi Pandey',
                 role: 'Advocate | District Courts, High Court',
-                img: 'https://i.ibb.co/4Rg74TZH/Whats-App-Image-2026-04-04-at-2-25-03-PM.jpg',
+                img: 'samridhi.jpg',
                 socials: { linkedin: 'https://www.linkedin.com/in/adv-samridhi-pandey-032a31214?utm_source=share_via&utm_content=profile&utm_medium=member_android', twitter: '#', email: 'Kumarisamridhipandey@gmail.com' }
             },
             'parkhi': {
                 name: 'Parkhi Pankaj',
                 role: 'Advocate | Associate',
-                img: 'https://i.ibb.co/dsmL9n3j/Whats-App-Image-2026-04-04-at-2-23-08-PM.jpg',
+                img: 'parkhi.jpg',
                 socials: { linkedin: 'https://www.linkedin.com/in/adv-parkhi-pankaj-859aab214?utm_source=share_via&utm_content=profile&utm_medium=member_android', twitter: '#', email: 'parkhiverma1212@gmail.com' }
             },
             'aditya': {
                 name: 'Aditya kr. Patel',
                 role: 'Firm Manager | Management & Admin',
-                img: 'https://i.ibb.co/Kc42CV6f/Whats-App-Image-2026-04-04-at-2-39-07-PM.jpg',
+                img: 'aditya.jpg',
                 socials: { linkedin: 'https://www.linkedin.com/in/aditya-kumar-patel-8a1ab1402?utm_source=share_via&utm_content=profile&utm_medium=member_android', twitter: '#', email: 'Adityakumarpatel0@gmail.com' }
             },
             'suraj': {
                 name: 'Suraj Kumar',
                 role: 'Munsi (Clerk) | Patna Courts Registry',
-                img: 'https://i.ibb.co/WpK3nq1S/Whats-App-Image-2026-04-04-at-1-38-32-PM.jpg',
-                socials: { linkedin: '#', twitter: '#', email: '#' }
+                img: 'suraj.jpeg',
+                socials: { linkedin: '#', twitter: '#', email: 'surajkumar141107@gmail.com' }
             }
         };
 
