@@ -85,18 +85,198 @@
             }
         }
 
-        function sendWhatsAppChat() {
-            const input = document.getElementById('wa-message-input');
-            let message = input.value.trim();
+        function handleUserMessage() {
+            const inputField = document.getElementById('chat-bot-input');
+            const userText = inputField.value.trim();
             
-            if (!message) {
-                message = "Hi, I need some legal assistance.";
+            if (!userText) return;
+
+            appendMessage('user', userText);
+            inputField.value = '';
+
+            setTimeout(() => {
+                const botResponse = getBotResponse(userText);
+                appendMessage('bot', botResponse);
+            }, 700);
+        }
+
+        function handleEnterKeyPress(event) {
+            if (event.key === 'Enter') {
+                handleUserMessage();
+            }
+        }
+
+        function appendMessage(sender, text) {
+            const chatContainer = document.getElementById('chat-messages');
+            const msgDiv = document.createElement('div');
+            
+            if (sender === 'user') {
+                msgDiv.className = "bg-[#25D366] text-white rounded-lg p-3 max-w-[85%] self-end text-sm shadow-sm";
+            } else {
+                msgDiv.className = "bg-gray-200 text-gray-800 rounded-lg p-3 max-w-[85%] self-start text-sm shadow-sm";
             }
             
-            window.open(`https://wa.me/917482914219?text=${encodeURIComponent(message)}`, '_blank');
+            msgDiv.textContent = text;
+            chatContainer.appendChild(msgDiv);
             
-            input.value = '';
-            toggleChatPopup();
+            chatContainer.scrollTop = chatContainer.scrollHeight;
+        }
+
+        let awaitingWhatsAppPermission = false;
+        let lastUserQuery = "";
+
+        const botKnowledge = [
+            {
+                intent: "criminal_and_bail",
+                priority: 100,
+                keywords: ["bail", "anticipatory", "police", "f.i.r", "fir", "arrest", "criminal", "crminal", "crmiminal", "jail", "court", "warrant", "crime", "murder", "fraud", "quashing"],
+                response: "We handle Regular Bail, Anticipatory Bail, and FIR quashing at the District Court and Patna High Court. Time is critical in criminal matters. Please contact us immediately at +91 74829 14219."
+            },
+            {
+                intent: "drt_sarfaesi_urgent",
+                priority: 100,
+                keywords: ["drt", "bank", "loan", "npa", "sarfaesi", "auction", "notice", "recovery", "default", "finance", "possession", "13(2)", "13(4)"],
+                response: "Under the SARFAESI Act, if you receive a Section 13(2) notice, you have 60 days to reply. If they take symbolic possession under Section 13(4), you have 45 days to file an SA in the DRT. Do not delay—call us at +91 74829 14219 for immediate representation by Adv. Sachin Kumar."
+            },
+
+            {
+                intent: "divorce_procedure",
+                priority: 90,
+                keywords: ["divorce", "divource", "divrce", "family", "marriage", "alimony", "custody", "wife", "husband", "maintenance", "dowry", "498a", "mutual consent", "13b"],
+                response: "For a mutual consent divorce under Section 13B, spouses must live separately for 1 year. The process involves a 'First Motion', a 6-month cooling-off period (which can sometimes be waived), and a 'Second Motion'. We handle all family, alimony, and custody matters."
+            },
+            {
+                intent: "property_title_search",
+                priority: 90,
+                keywords: ["property", "land", "dispute", "civil", "agreement", "registry", "title", "real estate", "partition", "zamin", "zameen", "dakhil kharij", "mutation", "encumbrance"],
+                response: "Before buying property, a Title Search is mandatory. We verify Sale Deeds, Encumbrance Certificates (EC), and Mutation (Dakhil Kharij) records to protect you from double-selling and forged documents. We also handle partition suits and RERA disputes."
+            },
+
+            {
+                intent: "track_record_stats",
+                priority: 80,
+                keywords: ["record", "success", "awards", "cases won", "experience", "how many clients", "reputation", "best lawyer"],
+                response: "Anjaneya Pramana Legal Associates has a stellar track record: over 100+ Corporate & Civil Clients, 150+ Cases Won, and 10+ Legal Awards. We deliver dynamic, ethical, and result-oriented legal services."
+            },
+            {
+                intent: "notable_cases",
+                priority: 80,
+                keywords: ["handled cases", "previous cases", "example", "history", "portfolio", "cwjc", "cr. misc"],
+                response: "We handle high-profile matters in the High Court. Some notable cases include Cr. Misc No.35276 of 2025 (Rajan Kumar), C.W.J.C No.12763 of 2024 (Durgawati Steel vs BIADA), and Arbitration Case No.01 of 2025 (S.K. Verma)."
+            },
+
+            {
+                intent: "advocate_sachin",
+                priority: 70,
+                keywords: ["sachin", "sachin kumar", "founder", "managing advocate", "main lawyer", "head lawyer", "owner", "boss"],
+                response: "Adv. Sachin Kumar (B.A. LL.B., Diploma in Cyber Law) is our Founder. He actively practices at the Patna High Court and Supreme Court, specializing in Banking Law (DRT), Civil/Commercial Litigation, and Constitutional Writs."
+            },
+            {
+                intent: "advocate_samridhi",
+                priority: 70,
+                keywords: ["samridhi", "pandey", "kumari samridhi", "lady advocate", "female lawyer"],
+                response: "Advocate Kumari Samridhi Pandey specializes in civil and criminal litigation. She is highly skilled in legal research, drafting pleadings, and practicing before the Patna High Court, District Courts, and DRT."
+            },
+            {
+                intent: "advocate_parkhi",
+                priority: 70,
+                keywords: ["parkhi", "pankaj", "parkhi pankaj"],
+                response: "Advocate Parkhi Pankaj focuses heavily on Real Estate Law, civil matters, and family disputes. She handles detailed legal research and procedural practice at the Patna High Court and District Courts."
+            },
+            {
+                intent: "staff_details",
+                priority: 70,
+                keywords: ["aditya", "patel", "suraj", "manager", "munsi", "clerk", "admin", "staff"],
+                response: "Our firm is supported by Aditya Kr. Patel (Firm Manager), who handles legal operations and client relations, and Suraj Kumar (Munsi/Clerk), who manages court registry, documentation, and office administration."
+            },
+
+            {
+                intent: "fees_and_cost",
+                priority: 50,
+                keywords: ["fee", "fees", "cost", "price", "charge", "charges", "how much", "expensive", "money", "consultation"],
+                response: "We offer a FREE initial 15-minute phone evaluation! After understanding your situation, we will provide a clear, upfront estimate of the legal fees required to proceed with your case."
+            },
+            {
+                intent: "time_and_duration",
+                priority: 50,
+                keywords: ["how long", "time", "duration", "fast", "quick", "months", "years", "speed"],
+                response: "Case duration depends on court schedules and complexity. However, we strive for efficient resolutions and frequently utilize Alternative Dispute Resolution (ADR) like arbitration or mediation to speed things up."
+            },
+            {
+                intent: "location_and_contact",
+                priority: 50,
+                keywords: ["location", "address", "where", "office", "visit", "meet", "appointment", "contact", "phone", "number", "email", "call"],
+                response: "Our office is at Kurji Ashiana Road, Near Platinum Library, Above Elite Food Junction, Rajeev Nagar, A.G Colony-800024, Patna. Call us at +91 74829 14219 or +91 70661 60162."
+            },
+            {
+                intent: "office_hours",
+                priority: 50,
+                keywords: ["timing", "hours", "open", "close", "sunday", "when are you open", "available"],
+                response: "Our office is open Monday to Saturday from 10:00 AM to 8:00 PM (20:00). We are available on Sundays optionally or by prior appointment."
+            },
+            {
+                intent: "social_media_and_language",
+                priority: 50,
+                keywords: ["language", "hindi", "english", "social media", "twitter", "linkedin"],
+                response: "We communicate fluently in both English and Hindi. You can also connect with us on Twitter (@LegalPramana312) and our LinkedIn page!"
+            },
+
+            {
+                intent: "articles_and_blog",
+                priority: 10,
+                keywords: ["article", "blog", "read", "guide", "insight", "learn", "information"],
+                response: "We regularly publish legal insights! Scroll to the 'Legal Insights' section of our website to read our guides on the SARFAESI Act, Mutual Consent Divorce steps, and Property Title Searches."
+            },
+            {
+                intent: "greetings",
+                priority: 10,
+                keywords: ["hi", "hii", "hiii", "hello", "hey", "heyy", "namaste", "pranam", "help", "assist"],
+                response: "Hello! Welcome to Anjaneya Pramana Legal Associates. How can I help you today? You can ask me about our services, specific legal processes (like Bail, DRT, Divorce), fees, or our advocates."
+            }
+        ];
+
+        function getBotResponse(input) {
+            const lowerInput = input.toLowerCase();
+            
+            if (awaitingWhatsAppPermission) {
+                if (lowerInput.match(/\b(yes|yep|sure|ok|yeah|y|ha|haan|yes please)\b/)) {
+                    awaitingWhatsAppPermission = false;
+                    
+                    setTimeout(() => {
+                        const waMessage = `Hi, I was chatting with your virtual assistant and I need human help regarding: "${lastUserQuery}"`;
+                        window.open(`https://wa.me/917482914219?text=${encodeURIComponent(waMessage)}`, '_blank');
+                        toggleChatPopup(); 
+                    }, 1500);
+                    
+                    return "Great! Redirecting you to our WhatsApp support team now. Please wait a moment...";
+                    
+                } else if (lowerInput.match(/\b(no|nope|nah|n|nahi)\b/)) {
+                    awaitingWhatsAppPermission = false;
+                    return "Okay, no problem! Feel free to ask another question or use the Contact Form on our website.";
+                } else {
+                    return "Please answer Yes or No. Would you like me to connect you with our legal team on WhatsApp?";
+                }
+            }
+            
+            let matchedCategories = [];
+            
+            for (const category of botKnowledge) {
+                const isMatch = category.keywords.some(keyword => lowerInput.includes(keyword));
+                if (isMatch) {
+                    matchedCategories.push(category);
+                }
+            }
+            
+            if (matchedCategories.length > 0) {
+                matchedCategories.sort((a, b) => b.priority - a.priority);
+                
+                return matchedCategories[0].response;
+            }
+            
+            awaitingWhatsAppPermission = true;
+            lastUserQuery = input; 
+            
+            return "I am a basic virtual assistant and I'm not quite sure how to answer that yet. Would you like me to redirect you to our human legal team on WhatsApp? (Please reply Yes or No)";
         }
 
         let currentLang = 'en';
