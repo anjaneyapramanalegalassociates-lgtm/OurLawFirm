@@ -5,7 +5,7 @@
     
     <url>
         <loc>https://anjaneyapramana.com/</loc>
-        <lastmod>2026-04-13T16:30:00+05:30</lastmod>
+        <lastmod>2026-04-17T13:30:00+05:30</lastmod>
         <changefreq>weekly</changefreq>
         <priority>1.0</priority>
         
@@ -14,30 +14,67 @@
         <xhtml:link rel="alternate" hreflang="x-default" href="https://anjaneyapramana.com/" />
         
         <image:image>
-            <image:loc>https://anjaneyapramana.com/anjaneya_pramana_logo.ico</image:loc>
+            <image:loc>https://i.ibb.co/7dvj1LVy/logo.jpg</image:loc>
             <image:title>Anjaneya Pramana Legal Associates Logo</image:title>
+            <image:caption>Best Law Firm in Patna, Bihar</image:caption>
         </image:image>
         <image:image>
+            <image:loc>https://anjaneyapramana.com/poster.jpg</image:loc>
+            <image:title>Anjaneya Pramana Legal Team</image:title>
+            <image:caption>Top Advocates and Lawyers Team in Patna Bihar</image:caption>
+        </image:image>
+        <image:image>
+            <image:loc>https://anjaneyapramana.com/ambition.jpg</image:loc>
+            <image:title>Law Firm Ambition</image:title>
+            <image:caption>Anjaneya Pramana Law Firm Patna Ambition and Dedication</image:caption>
+        </image:image>
+
+        <image:image>
             <image:loc>https://anjaneyapramana.com/sachin.jpg</image:loc>
-            <image:title>Advocate Sachin Kumar - Founder and Managing Advocate</image:title>
+            <image:title>Adv. Sachin Kumar</image:title>
+            <image:caption>Advocate Sachin Kumar - Founder and Managing Advocate specializing in DRT and High Court</image:caption>
         </image:image>
         <image:image>
             <image:loc>https://anjaneyapramana.com/samridhi.jpg</image:loc>
-            <image:title>Kumari Samridhi Pandey - Civil and Criminal Lawyer</image:title>
+            <image:title>Kumari Samridhi Pandey</image:title>
+            <image:caption>Kumari Samridhi Pandey - Civil, Criminal, and Family Lawyer</image:caption>
         </image:image>
         <image:image>
             <image:loc>https://anjaneyapramana.com/parkhi.jpg</image:loc>
-            <image:title>Parkhi Pankaj - Civil and Family Lawyer</image:title>
+            <image:title>Parkhi Pankaj</image:title>
+            <image:caption>Parkhi Pankaj - Civil and Real Estate Lawyer</image:caption>
         </image:image>
         <image:image>
             <image:loc>https://anjaneyapramana.com/aditya.jpg</image:loc>
-            <image:title>Aditya kr. Patel - Legal Firm Manager</image:title>
+            <image:title>Aditya kr. Patel</image:title>
+            <image:caption>Aditya kr. Patel - Legal Firm Manager</image:caption>
+        </image:image>
+        <image:image>
+            <image:loc>https://anjaneyapramana.com/suraj.jpeg</image:loc>
+            <image:title>Suraj Kumar</image:title>
+            <image:caption>Suraj Kumar - Court Clerk and Legal Office Administrator</image:caption>
+        </image:image>
+
+        <image:image>
+            <image:loc>https://anjaneyapramana.com/banking-law-article.jpeg</image:loc>
+            <image:title>SARFAESI Act Guide</image:title>
+            <image:caption>Understanding the SARFAESI Act: A Guide for Borrowers</image:caption>
+        </image:image>
+        <image:image>
+            <image:loc>https://anjaneyapramana.com/family-law-article.jpg</image:loc>
+            <image:title>Mutual Consent Divorce Process</image:title>
+            <image:caption>Crucial Steps in Filing a Mutual Consent Divorce Petition in Bihar</image:caption>
+        </image:image>
+        <image:image>
+            <image:loc>https://anjaneyapramana.com/real-estate-article.jpg</image:loc>
+            <image:title>Property Title Search Guide</image:title>
+            <image:caption>Property Disputes: The Importance of a Title Search before buying real estate</image:caption>
         </image:image>
     </url>
     
     <url>
         <loc>https://anjaneyapramana.com/?lang=hi</loc>
-        <lastmod>2026-04-13T16:30:00+05:30</lastmod>
+        <lastmod>2026-04-17T13:30:00+05:30</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.8</priority>
         
@@ -45,4 +82,5 @@
         <xhtml:link rel="alternate" hreflang="hi" href="https://anjaneyapramana.com/?lang=hi" />
         <xhtml:link rel="alternate" hreflang="x-default" href="https://anjaneyapramana.com/" />
     </url>
+
 </urlset>
